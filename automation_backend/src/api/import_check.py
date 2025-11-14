@@ -6,6 +6,13 @@ Usage:
 or from the container root:
   PYTHONPATH=automation_backend/src python network-functional-testing-automation-192533-192542/automation_backend/src/api/import_check.py
 """
+import os
+import traceback
+
+# help ensure clean minimal config for CI import
+os.environ.setdefault("ENABLE_DRY_RUN", "true")
+os.environ.setdefault("TIMEOUT_SECONDS", "1")
+os.environ.setdefault("LOG_LEVEL", "ERROR")
 
 # PUBLIC_INTERFACE
 def check() -> bool:
@@ -15,6 +22,7 @@ def check() -> bool:
         return True
     except Exception as exc:
         print(f"Import failed: {exc}")
+        traceback.print_exc()
         return False
 
 
