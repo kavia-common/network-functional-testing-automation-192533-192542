@@ -704,7 +704,7 @@
     "schemas": {
       "Body_ftp_keepalive_api_v1_tests_ftp_keepalive_post": {
         "properties": {
-          "req": {
+          "request": {
             "$ref": "#/components/schemas/KeepAliveRequest"
           },
           "settings": {
@@ -713,13 +713,13 @@
         },
         "type": "object",
         "required": [
-          "req"
+          "request"
         ],
         "title": "Body_ftp_keepalive_api_v1_tests_ftp_keepalive_post"
       },
       "Body_ingest_api_v1_telemetry_ingest_post": {
         "properties": {
-          "req": {
+          "request": {
             "$ref": "#/components/schemas/TelemetryIngestRequest"
           },
           "settings": {
@@ -728,13 +728,13 @@
         },
         "type": "object",
         "required": [
-          "req"
+          "request"
         ],
         "title": "Body_ingest_api_v1_telemetry_ingest_post"
       },
       "Body_stability_start_api_v1_tests_stability_start_post": {
         "properties": {
-          "req": {
+          "request": {
             "$ref": "#/components/schemas/StabilityStartRequest"
           },
           "settings": {
@@ -743,13 +743,13 @@
         },
         "type": "object",
         "required": [
-          "req"
+          "request"
         ],
         "title": "Body_stability_start_api_v1_tests_stability_start_post"
       },
       "Body_streaming_check_api_v1_tests_streaming_check_post": {
         "properties": {
-          "req": {
+          "request": {
             "$ref": "#/components/schemas/StreamingCheckRequest"
           },
           "settings": {
@@ -758,13 +758,13 @@
         },
         "type": "object",
         "required": [
-          "req"
+          "request"
         ],
         "title": "Body_streaming_check_api_v1_tests_streaming_check_post"
       },
       "Body_traffic_download_api_v1_tests_traffic_download_post": {
         "properties": {
-          "req": {
+          "request": {
             "$ref": "#/components/schemas/TrafficRequest"
           },
           "settings": {
@@ -773,13 +773,13 @@
         },
         "type": "object",
         "required": [
-          "req"
+          "request"
         ],
         "title": "Body_traffic_download_api_v1_tests_traffic_download_post"
       },
       "Body_traffic_upload_api_v1_tests_traffic_upload_post": {
         "properties": {
-          "req": {
+          "request": {
             "$ref": "#/components/schemas/TrafficRequest"
           },
           "settings": {
@@ -788,13 +788,13 @@
         },
         "type": "object",
         "required": [
-          "req"
+          "request"
         ],
         "title": "Body_traffic_upload_api_v1_tests_traffic_upload_post"
       },
       "Body_voip_setup_api_v1_tests_voip_call_setup_post": {
         "properties": {
-          "req": {
+          "request": {
             "$ref": "#/components/schemas/VoipCallRequest"
           },
           "settings": {
@@ -803,13 +803,13 @@
         },
         "type": "object",
         "required": [
-          "req"
+          "request"
         ],
         "title": "Body_voip_setup_api_v1_tests_voip_call_setup_post"
       },
       "Body_vpn_connect_api_v1_tests_vpn_connect_post": {
         "properties": {
-          "req": {
+          "request": {
             "$ref": "#/components/schemas/VPNConnectRequest"
           },
           "settings": {
@@ -818,7 +818,7 @@
         },
         "type": "object",
         "required": [
-          "req"
+          "request"
         ],
         "title": "Body_vpn_connect_api_v1_tests_vpn_connect_post"
       },
