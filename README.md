@@ -7,11 +7,14 @@ Automation backend providing FastAPI endpoints for network functional testing (t
 - Install dependencies (Python 3.11+ recommended):
   pip install -r automation_backend/requirements.txt
 
-- Start app:
+- Start app (recommended for preview runners and CI):
   uvicorn src.api.main:app --host 0.0.0.0 --port 3001 --reload --app-dir automation_backend/src
 
-Alternatively (uses APP_HOST/APP_PORT from .env or defaults: 0.0.0.0:3001):
+- Alternative (uses APP_HOST/APP_PORT from .env or defaults: 0.0.0.0:3001):
   PYTHONPATH=automation_backend/src python -m src.api.run
+
+- Preview helper (ensures correct app-dir automatically):
+  PYTHONPATH=automation_backend/src python -m src.api.preview_run
 
 Docs: http://localhost:3001/docs
 OpenAPI JSON: http://localhost:3001/openapi.json
