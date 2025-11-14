@@ -1,15 +1,18 @@
 import json
-import os
-
+from fastapi.testclient import TestClient
 from src.api.main import app
 
-# Get the OpenAPI schema
-openapi_schema = app.openapi()
 
-# Write to file
-output_dir = "interfaces"
-os.makedirs(output_dir, exist_ok=True)
-output_path = os.path.join(output_dir, "openapi.json")
+def generate_openapi_json(path: str = "interfaces/openapi.json"):
+    """Generate the OpenAPI JSON for the FastAPI app to the interfaces folder."""
+    client = TestClient(app)
+    # Trigger schema build
+    client.get("/openapi.json")
+    schema = app.openapi()
+    with open(path, "w") as f:
+        json.dump(schema, f, indent=2)
+    print(f"Wrote OpenAPI schema to {path}")
 
-with open(output_path, "w") as f:
-    json.dump(openapi_schema, f, indent=2)
+
+if __name__ == "__main__":
+    generate_openapi_json()
