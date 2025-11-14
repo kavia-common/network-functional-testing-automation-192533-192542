@@ -1,0 +1,4 @@
+{
+    "command": "pytest",
+    "working_directory": "/home/kavia/workspace/code-generation/network-functional-testing-automation-192533-192542/automation_backend"
+}
