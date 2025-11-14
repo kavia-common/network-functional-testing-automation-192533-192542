@@ -1,7 +1,7 @@
 from typing import List
 from fastapi import APIRouter, Depends, Query
-from src.api.dependencies import get_telemetry_service
-from src.core.models import TelemetryIngestRequest, TelemetryItem
+from api.dependencies import get_telemetry_service
+from core.models import TelemetryIngestRequest, TelemetryItem
 
 router = APIRouter(prefix="/api/v1/telemetry", tags=["telemetry"])
 

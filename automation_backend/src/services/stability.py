@@ -4,8 +4,8 @@ import time
 import uuid
 from datetime import datetime
 
-from src.core.config import Settings
-from src.core.models import JobInfo, JobStatus, JOBS, StabilityStartRequest
+from core.config import Settings
+from core.models import JobInfo, JobStatus, JOBS, StabilityStartRequest
 
 logger = logging.getLogger(__name__)
 

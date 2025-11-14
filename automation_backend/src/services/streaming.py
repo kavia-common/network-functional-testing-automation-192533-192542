@@ -1,7 +1,7 @@
 import logging
 import urllib.request
-from src.core.config import Settings
-from src.core.models import StreamingCheckRequest, StreamingCheckResult
+from core.config import Settings
+from core.models import StreamingCheckRequest, StreamingCheckResult
 
 logger = logging.getLogger(__name__)
 

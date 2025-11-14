@@ -1,5 +1,5 @@
 import uvicorn
-from src.core.config import get_settings
+from core.config import get_settings
 
 # PUBLIC_INTERFACE
 def main():

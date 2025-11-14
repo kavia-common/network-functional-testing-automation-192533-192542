@@ -1,13 +1,13 @@
 from functools import lru_cache
 
-from src.core.config import Settings, get_settings
-from src.services.traffic import TrafficService
-from src.services.voip import VoipService
-from src.services.ftp import FtpService
-from src.services.vpn import VpnService
-from src.services.streaming import StreamingService
-from src.services.stability import StabilityService
-from src.services.telemetry import TelemetryService
+from core.config import Settings, get_settings
+from services.traffic import TrafficService
+from services.voip import VoipService
+from services.ftp import FtpService
+from services.vpn import VpnService
+from services.streaming import StreamingService
+from services.stability import StabilityService
+from services.telemetry import TelemetryService
 
 
 @lru_cache

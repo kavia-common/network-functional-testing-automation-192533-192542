@@ -1,0 +1,1416 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Network Functional Testing Automation API",
+    "description": "FastAPI backend providing endpoints for traffic tests, VOIP integration, FTP keep-alive, VPN status, streaming checks, stability jobs, and telemetry ingestion.",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/": {
+      "get": {
+        "tags": [
+          "health"
+        ],
+        "summary": "Health Check (root)",
+        "description": "Root endpoint to validate the service is up.",
+        "operationId": "root_health__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "tags": [
+          "health"
+        ],
+        "summary": "Health Check",
+        "description": "Explicit health endpoint at root.",
+        "operationId": "health_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/health": {
+      "get": {
+        "tags": [
+          "health"
+        ],
+        "summary": "API v1 Health",
+        "description": "Health endpoint under /api/v1.",
+        "operationId": "api_v1_health_api_v1_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/tests/traffic/upload": {
+      "post": {
+        "tags": [
+          "tests"
+        ],
+        "summary": "Run upload traffic test",
+        "description": "Run an upload traffic test and return result.",
+        "operationId": "traffic_upload_api_v1_tests_traffic_upload_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_traffic_upload_api_v1_tests_traffic_upload_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TrafficResult"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/tests/traffic/download": {
+      "post": {
+        "tags": [
+          "tests"
+        ],
+        "summary": "Run download traffic test",
+        "description": "Run a download traffic test and return result.",
+        "operationId": "traffic_download_api_v1_tests_traffic_download_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_traffic_download_api_v1_tests_traffic_download_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TrafficResult"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/tests/voip/call/setup": {
+      "post": {
+        "tags": [
+          "tests"
+        ],
+        "summary": "Setup VOIP call",
+        "description": "Initiate a VOIP call setup.",
+        "operationId": "voip_setup_api_v1_tests_voip_call_setup_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_voip_setup_api_v1_tests_voip_call_setup_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericAck"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/tests/voip/call/teardown": {
+      "post": {
+        "tags": [
+          "tests"
+        ],
+        "summary": "Teardown VOIP call",
+        "description": "Teardown VOIP call.",
+        "operationId": "voip_teardown_api_v1_tests_voip_call_teardown_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Settings"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericAck"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/tests/ftp/keepalive": {
+      "post": {
+        "tags": [
+          "tests"
+        ],
+        "summary": "Send FTP keepalive",
+        "description": "Perform FTP keep-alive operation.",
+        "operationId": "ftp_keepalive_api_v1_tests_ftp_keepalive_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_ftp_keepalive_api_v1_tests_ftp_keepalive_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericAck"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/tests/vpn/connect": {
+      "post": {
+        "tags": [
+          "tests"
+        ],
+        "summary": "Connect VPN",
+        "description": "Simulate VPN connect and check status.",
+        "operationId": "vpn_connect_api_v1_tests_vpn_connect_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_vpn_connect_api_v1_tests_vpn_connect_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VPNStatus"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/tests/vpn/status": {
+      "post": {
+        "tags": [
+          "tests"
+        ],
+        "summary": "VPN status",
+        "description": "Get current VPN status.",
+        "operationId": "vpn_status_api_v1_tests_vpn_status_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Settings"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VPNStatus"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/tests/streaming/check": {
+      "post": {
+        "tags": [
+          "tests"
+        ],
+        "summary": "Check streaming URL",
+        "description": "Check streaming URL reachability.",
+        "operationId": "streaming_check_api_v1_tests_streaming_check_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_streaming_check_api_v1_tests_streaming_check_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StreamingCheckResult"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/tests/stability/start": {
+      "post": {
+        "tags": [
+          "tests"
+        ],
+        "summary": "Start stability test",
+        "description": "Start a background stability test job.",
+        "operationId": "stability_start_api_v1_tests_stability_start_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_stability_start_api_v1_tests_stability_start_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobInfo"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/tests/stability/status": {
+      "get": {
+        "tags": [
+          "tests"
+        ],
+        "summary": "Get stability job status",
+        "description": "Get stability job status by id.",
+        "operationId": "stability_status_api_v1_tests_stability_status_get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Settings"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobInfo"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/tests/{id}/result": {
+      "get": {
+        "tags": [
+          "tests"
+        ],
+        "summary": "Get test result by id",
+        "description": "Get stored test result by id.",
+        "operationId": "get_test_result_api_v1_tests__id__result_get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Settings"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TrafficResult"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/telemetry/ingest": {
+      "post": {
+        "tags": [
+          "telemetry"
+        ],
+        "summary": "Ingest telemetry items",
+        "description": "Ingest one or more telemetry items, returning the number accepted.",
+        "operationId": "ingest_api_v1_telemetry_ingest_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_ingest_api_v1_telemetry_ingest_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "title": "Response Ingest Api V1 Telemetry Ingest Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/telemetry/last": {
+      "get": {
+        "tags": [
+          "telemetry"
+        ],
+        "summary": "Get last telemetry items",
+        "description": "Retrieve the last N telemetry items.",
+        "operationId": "last_api_v1_telemetry_last_get",
+        "parameters": [
+          {
+            "name": "n",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "description": "Number of last items",
+              "default": 1,
+              "title": "N"
+            },
+            "description": "Number of last items"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Settings"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TelemetryItem"
+                  },
+                  "title": "Response Last Api V1 Telemetry Last Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/telemetry/metrics": {
+      "get": {
+        "tags": [
+          "telemetry"
+        ],
+        "summary": "List metric names",
+        "description": "Retrieve list of metric names present in the buffer.",
+        "operationId": "metrics_api_v1_telemetry_metrics_get",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Settings"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array",
+                  "title": "Response Metrics Api V1 Telemetry Metrics Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Body_ftp_keepalive_api_v1_tests_ftp_keepalive_post": {
+        "properties": {
+          "req": {
+            "$ref": "#/components/schemas/KeepAliveRequest"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/Settings"
+          }
+        },
+        "type": "object",
+        "required": [
+          "req"
+        ],
+        "title": "Body_ftp_keepalive_api_v1_tests_ftp_keepalive_post"
+      },
+      "Body_ingest_api_v1_telemetry_ingest_post": {
+        "properties": {
+          "req": {
+            "$ref": "#/components/schemas/TelemetryIngestRequest"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/Settings"
+          }
+        },
+        "type": "object",
+        "required": [
+          "req"
+        ],
+        "title": "Body_ingest_api_v1_telemetry_ingest_post"
+      },
+      "Body_stability_start_api_v1_tests_stability_start_post": {
+        "properties": {
+          "req": {
+            "$ref": "#/components/schemas/StabilityStartRequest"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/Settings"
+          }
+        },
+        "type": "object",
+        "required": [
+          "req"
+        ],
+        "title": "Body_stability_start_api_v1_tests_stability_start_post"
+      },
+      "Body_streaming_check_api_v1_tests_streaming_check_post": {
+        "properties": {
+          "req": {
+            "$ref": "#/components/schemas/StreamingCheckRequest"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/Settings"
+          }
+        },
+        "type": "object",
+        "required": [
+          "req"
+        ],
+        "title": "Body_streaming_check_api_v1_tests_streaming_check_post"
+      },
+      "Body_traffic_download_api_v1_tests_traffic_download_post": {
+        "properties": {
+          "req": {
+            "$ref": "#/components/schemas/TrafficRequest"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/Settings"
+          }
+        },
+        "type": "object",
+        "required": [
+          "req"
+        ],
+        "title": "Body_traffic_download_api_v1_tests_traffic_download_post"
+      },
+      "Body_traffic_upload_api_v1_tests_traffic_upload_post": {
+        "properties": {
+          "req": {
+            "$ref": "#/components/schemas/TrafficRequest"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/Settings"
+          }
+        },
+        "type": "object",
+        "required": [
+          "req"
+        ],
+        "title": "Body_traffic_upload_api_v1_tests_traffic_upload_post"
+      },
+      "Body_voip_setup_api_v1_tests_voip_call_setup_post": {
+        "properties": {
+          "req": {
+            "$ref": "#/components/schemas/VoipCallRequest"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/Settings"
+          }
+        },
+        "type": "object",
+        "required": [
+          "req"
+        ],
+        "title": "Body_voip_setup_api_v1_tests_voip_call_setup_post"
+      },
+      "Body_vpn_connect_api_v1_tests_vpn_connect_post": {
+        "properties": {
+          "req": {
+            "$ref": "#/components/schemas/VPNConnectRequest"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/Settings"
+          }
+        },
+        "type": "object",
+        "required": [
+          "req"
+        ],
+        "title": "Body_vpn_connect_api_v1_tests_vpn_connect_post"
+      },
+      "GenericAck": {
+        "properties": {
+          "ok": {
+            "type": "boolean",
+            "title": "Ok",
+            "description": "Whether the request was accepted"
+          },
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "description": "Additional message"
+          }
+        },
+        "type": "object",
+        "required": [
+          "ok",
+          "message"
+        ],
+        "title": "GenericAck"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "HealthResponse": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "Status",
+            "description": "Overall health status"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp",
+            "description": "Server time in UTC"
+          }
+        },
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "title": "HealthResponse"
+      },
+      "JobInfo": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id",
+            "description": "Job id"
+          },
+          "status": {
+            "$ref": "#/components/schemas/JobStatus",
+            "description": "Status of the job"
+          },
+          "started_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Started At",
+            "description": "Start time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At",
+            "description": "Last update time"
+          },
+          "message": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Message",
+            "description": "Status message"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "status",
+          "started_at",
+          "updated_at"
+        ],
+        "title": "JobInfo"
+      },
+      "JobStatus": {
+        "type": "string",
+        "enum": [
+          "pending",
+          "running",
+          "completed",
+          "failed"
+        ],
+        "title": "JobStatus"
+      },
+      "KeepAliveRequest": {
+        "properties": {
+          "host": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Host",
+            "description": "FTP host override"
+          },
+          "username": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Username",
+            "description": "FTP username override"
+          },
+          "password": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Password",
+            "description": "FTP password override"
+          },
+          "interval_seconds": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Interval Seconds",
+            "description": "Interval between keep-alive operations"
+          }
+        },
+        "type": "object",
+        "title": "KeepAliveRequest"
+      },
+      "Settings": {
+        "properties": {
+          "APP_HOST": {
+            "type": "string",
+            "title": "App Host",
+            "description": "Host to bind FastAPI app",
+            "default": "0.0.0.0"
+          },
+          "APP_PORT": {
+            "type": "integer",
+            "title": "App Port",
+            "description": "Port to bind FastAPI app",
+            "default": 3001
+          },
+          "TIMEOUT_SECONDS": {
+            "type": "integer",
+            "title": "Timeout Seconds",
+            "description": "Default network timeout in seconds",
+            "default": 10
+          },
+          "TRAFFIC_TEST_URL": {
+            "type": "string",
+            "title": "Traffic Test Url",
+            "description": "Default URL for traffic download tests",
+            "default": "https://speed.hetzner.de/100MB.bin"
+          },
+          "VOIP_APP_PATH": {
+            "type": "string",
+            "title": "Voip App Path",
+            "description": "Path to VOIP application for integration",
+            "default": ""
+          },
+          "FTP_HOST": {
+            "type": "string",
+            "title": "Ftp Host",
+            "description": "FTP server hostname",
+            "default": ""
+          },
+          "FTP_USERNAME": {
+            "type": "string",
+            "title": "Ftp Username",
+            "description": "FTP username",
+            "default": ""
+          },
+          "FTP_PASSWORD": {
+            "type": "string",
+            "title": "Ftp Password",
+            "description": "FTP password",
+            "default": ""
+          },
+          "VPN_CHECK_HOST": {
+            "type": "string",
+            "title": "Vpn Check Host",
+            "description": "Host used to check VPN connectivity",
+            "default": "1.1.1.1"
+          },
+          "STREAM_CHECK_URL": {
+            "type": "string",
+            "title": "Stream Check Url",
+            "description": "HLS stream URL to check streaming",
+            "default": "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"
+          },
+          "TELEMETRY_BUFFER_SIZE": {
+            "type": "integer",
+            "title": "Telemetry Buffer Size",
+            "description": "Max telemetry items kept in memory buffer",
+            "default": 1000
+          },
+          "LOG_LEVEL": {
+            "type": "string",
+            "title": "Log Level",
+            "description": "Log level: DEBUG, INFO, WARNING, ERROR, CRITICAL",
+            "default": "INFO"
+          },
+          "ENABLE_DRY_RUN": {
+            "type": "boolean",
+            "title": "Enable Dry Run",
+            "description": "If true, services will simulate actions without external side effects",
+            "default": true
+          }
+        },
+        "type": "object",
+        "title": "Settings",
+        "description": "Application settings loaded from environment variables with defaults."
+      },
+      "StabilityStartRequest": {
+        "properties": {
+          "duration_seconds": {
+            "type": "integer",
+            "title": "Duration Seconds",
+            "description": "How long to run the stability test"
+          },
+          "note": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Note",
+            "description": "Optional note for the job"
+          }
+        },
+        "type": "object",
+        "required": [
+          "duration_seconds"
+        ],
+        "title": "StabilityStartRequest"
+      },
+      "StreamingCheckRequest": {
+        "properties": {
+          "url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Url",
+            "description": "Streaming URL override to check"
+          }
+        },
+        "type": "object",
+        "title": "StreamingCheckRequest"
+      },
+      "StreamingCheckResult": {
+        "properties": {
+          "url": {
+            "type": "string",
+            "title": "Url",
+            "description": "Checked streaming URL"
+          },
+          "reachable": {
+            "type": "boolean",
+            "title": "Reachable",
+            "description": "Whether stream is reachable"
+          },
+          "details": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Details",
+            "description": "Extra details"
+          }
+        },
+        "type": "object",
+        "required": [
+          "url",
+          "reachable"
+        ],
+        "title": "StreamingCheckResult"
+      },
+      "TelemetryIngestRequest": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/TelemetryItem"
+            },
+            "type": "array",
+            "title": "Items",
+            "description": "List of telemetry items to ingest"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items"
+        ],
+        "title": "TelemetryIngestRequest"
+      },
+      "TelemetryItem": {
+        "properties": {
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp",
+            "description": "Telemetry time"
+          },
+          "metric": {
+            "type": "string",
+            "title": "Metric",
+            "description": "Metric name"
+          },
+          "value": {
+            "type": "number",
+            "title": "Value",
+            "description": "Metric value"
+          },
+          "tags": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object",
+            "title": "Tags",
+            "description": "Arbitrary tags"
+          }
+        },
+        "type": "object",
+        "required": [
+          "metric",
+          "value"
+        ],
+        "title": "TelemetryItem"
+      },
+      "TrafficRequest": {
+        "properties": {
+          "target_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Target Url",
+            "description": "Override URL to use for traffic test"
+          },
+          "duration_seconds": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Duration Seconds",
+            "description": "Optional duration for the test"
+          },
+          "bytes": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Bytes",
+            "description": "Optional byte size to upload/download"
+          }
+        },
+        "type": "object",
+        "title": "TrafficRequest"
+      },
+      "TrafficResult": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id",
+            "description": "Job id"
+          },
+          "direction": {
+            "type": "string",
+            "title": "Direction",
+            "description": "upload or download"
+          },
+          "success": {
+            "type": "boolean",
+            "title": "Success",
+            "description": "Whether the test succeeded"
+          },
+          "throughput_mbps": {
+            "type": "number",
+            "title": "Throughput Mbps",
+            "description": "Measured throughput in Mbps"
+          },
+          "started_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Started At",
+            "description": "Start time"
+          },
+          "finished_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Finished At",
+            "description": "Finish time"
+          },
+          "details": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Details",
+            "description": "Additional details"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "direction",
+          "success",
+          "throughput_mbps",
+          "started_at",
+          "finished_at"
+        ],
+        "title": "TrafficResult"
+      },
+      "VPNConnectRequest": {
+        "properties": {
+          "config_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Config Name",
+            "description": "VPN configuration name or profile"
+          }
+        },
+        "type": "object",
+        "title": "VPNConnectRequest"
+      },
+      "VPNStatus": {
+        "properties": {
+          "connected": {
+            "type": "boolean",
+            "title": "Connected",
+            "description": "Whether VPN is connected"
+          },
+          "check_host": {
+            "type": "string",
+            "title": "Check Host",
+            "description": "Host used for connectivity check"
+          },
+          "latency_ms": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Latency Ms",
+            "description": "Estimated latency in ms"
+          }
+        },
+        "type": "object",
+        "required": [
+          "connected",
+          "check_host"
+        ],
+        "title": "VPNStatus"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      },
+      "VoipCallRequest": {
+        "properties": {
+          "callee": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Callee",
+            "description": "Callee identifier or number"
+          },
+          "app_path": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "App Path",
+            "description": "Override path to VOIP app"
+          }
+        },
+        "type": "object",
+        "title": "VoipCallRequest"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "health",
+      "description": "Health checks"
+    },
+    {
+      "name": "tests",
+      "description": "Network functional test endpoints"
+    },
+    {
+      "name": "telemetry",
+      "description": "Telemetry ingestion and queries"
+    }
+  ]
+}

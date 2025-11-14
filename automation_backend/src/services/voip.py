@@ -1,6 +1,6 @@
 import logging
-from src.core.config import Settings
-from src.core.models import GenericAck, VoipCallRequest
+from core.config import Settings
+from core.models import GenericAck, VoipCallRequest
 
 logger = logging.getLogger(__name__)
 

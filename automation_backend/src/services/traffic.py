@@ -3,8 +3,8 @@ import time
 import uuid
 from datetime import datetime
 
-from src.core.config import Settings
-from src.core.models import TrafficRequest, TrafficResult, TEST_RESULTS
+from core.config import Settings
+from core.models import TrafficRequest, TrafficResult, TEST_RESULTS
 
 logger = logging.getLogger(__name__)
 

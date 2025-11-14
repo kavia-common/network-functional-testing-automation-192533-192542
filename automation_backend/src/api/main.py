@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from src.api.routers import health as health_router
-from src.api.routers import tests as tests_router
-from src.api.routers import telemetry as telemetry_router
+from api.routers import health as health_router
+from api.routers import tests as tests_router
+from api.routers import telemetry as telemetry_router
 
 app = FastAPI(
     title="Network Functional Testing Automation API",
