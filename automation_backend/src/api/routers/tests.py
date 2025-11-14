@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, Body
+from fastapi import APIRouter, Depends, HTTPException
 from ..dependencies import (
     get_traffic_service,
     get_voip_service,
@@ -26,29 +26,29 @@ router = APIRouter(prefix="/api/v1/tests", tags=["tests"])
 
 @router.post("/traffic/upload", summary="Run upload traffic test", response_model=TrafficResult)
 def traffic_upload(
-    req: TrafficRequest = Body(..., embed=False),
+    request: TrafficRequest,
     svc=Depends(get_traffic_service),
 ) -> TrafficResult:
     """Run an upload traffic test and return result."""
-    return svc.upload(req)
+    return svc.upload(request)
 
 
 @router.post("/traffic/download", summary="Run download traffic test", response_model=TrafficResult)
 def traffic_download(
-    req: TrafficRequest = Body(..., embed=False),
+    request: TrafficRequest,
     svc=Depends(get_traffic_service),
 ) -> TrafficResult:
     """Run a download traffic test and return result."""
-    return svc.download(req)
+    return svc.download(request)
 
 
 @router.post("/voip/call/setup", summary="Setup VOIP call", response_model=GenericAck)
 def voip_setup(
-    req: VoipCallRequest = Body(..., embed=False),
+    request: VoipCallRequest,
     svc=Depends(get_voip_service),
 ) -> GenericAck:
     """Initiate a VOIP call setup."""
-    return svc.setup_call(req)
+    return svc.setup_call(request)
 
 
 @router.post("/voip/call/teardown", summary="Teardown VOIP call", response_model=GenericAck)
@@ -59,20 +59,20 @@ def voip_teardown(svc=Depends(get_voip_service)) -> GenericAck:
 
 @router.post("/ftp/keepalive", summary="Send FTP keepalive", response_model=GenericAck)
 def ftp_keepalive(
-    req: KeepAliveRequest = Body(..., embed=False),
+    request: KeepAliveRequest,
     svc=Depends(get_ftp_service),
 ) -> GenericAck:
     """Perform FTP keep-alive operation."""
-    return svc.keepalive(req)
+    return svc.keepalive(request)
 
 
 @router.post("/vpn/connect", summary="Connect VPN", response_model=VPNStatus)
 def vpn_connect(
-    req: VPNConnectRequest = Body(..., embed=False),
+    request: VPNConnectRequest,
     svc=Depends(get_vpn_service),
 ) -> VPNStatus:
     """Simulate VPN connect and check status."""
-    return svc.connect(req)
+    return svc.connect(request)
 
 
 @router.post("/vpn/status", summary="VPN status", response_model=VPNStatus)
@@ -83,20 +83,20 @@ def vpn_status(svc=Depends(get_vpn_service)) -> VPNStatus:
 
 @router.post("/streaming/check", summary="Check streaming URL", response_model=StreamingCheckResult)
 def streaming_check(
-    req: StreamingCheckRequest = Body(..., embed=False),
+    request: StreamingCheckRequest,
     svc=Depends(get_streaming_service),
 ) -> StreamingCheckResult:
     """Check streaming URL reachability."""
-    return svc.check(req)
+    return svc.check(request)
 
 
 @router.post("/stability/start", summary="Start stability test", response_model=JobInfo)
 def stability_start(
-    req: StabilityStartRequest = Body(..., embed=False),
+    request: StabilityStartRequest,
     svc=Depends(get_stability_service),
 ) -> JobInfo:
     """Start a background stability test job."""
-    return svc.start(req)
+    return svc.start(request)
 
 
 @router.get("/stability/status", summary="Get stability job status", response_model=JobInfo)

@@ -1,5 +1,5 @@
 from typing import List
-from fastapi import APIRouter, Depends, Query, Body
+from fastapi import APIRouter, Depends, Query
 from ..dependencies import get_telemetry_service
 from ...core.models import TelemetryIngestRequest, TelemetryItem
 
@@ -8,11 +8,11 @@ router = APIRouter(prefix="/api/v1/telemetry", tags=["telemetry"])
 
 @router.post("/ingest", summary="Ingest telemetry items", response_model=int)
 def ingest(
-    req: TelemetryIngestRequest = Body(..., embed=False),
+    request: TelemetryIngestRequest,
     svc=Depends(get_telemetry_service),
 ) -> int:
     """Ingest one or more telemetry items, returning the number accepted."""
-    return svc.ingest(req)
+    return svc.ingest(request)
 
 
 @router.get("/last", summary="Get last telemetry items", response_model=List[TelemetryItem])
