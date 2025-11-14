@@ -6,9 +6,9 @@ from fastapi.responses import JSONResponse
 from starlette import status
 
 # Import routers using the full 'src.' package path so uvicorn 'src.api.main:app' works consistently
-from src.api.routers import health as health_router
-from src.api.routers import tests as tests_router
-from src.api.routers import telemetry as telemetry_router
+from .routers import health as health_router
+from .routers import tests as tests_router
+from .routers import telemetry as telemetry_router
 
 logger = logging.getLogger(__name__)
 

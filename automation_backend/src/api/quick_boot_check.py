@@ -19,9 +19,9 @@ def run_quick_boot_check(timeout: float = 5.0) -> int:
     """
     try:
         import uvicorn
-        from src.core.config import get_settings
+        from ..core.config import get_settings
         # Import app to validate import path, but we will launch via uvicorn programmatically
-        from src.api.main import app  # noqa: F401
+        from .main import app  # noqa: F401
     except Exception as exc:
         print(f"[quick_boot_check] Import failed: {exc}", file=sys.stderr)
         return 2

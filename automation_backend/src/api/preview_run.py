@@ -36,7 +36,7 @@ def main():
 
     # Import settings and derive host/port
     try:
-        from src.core.config import get_settings
+        from ..core.config import get_settings
         settings = get_settings()
         host = settings.APP_HOST
         port = settings.APP_PORT

@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException
-from src.api.dependencies import (
+from ..dependencies import (
     get_traffic_service,
     get_voip_service,
     get_ftp_service,
@@ -7,7 +7,7 @@ from src.api.dependencies import (
     get_streaming_service,
     get_stability_service,
 )
-from src.core.models import (
+from ...core.models import (
     TrafficRequest,
     TrafficResult,
     VoipCallRequest,

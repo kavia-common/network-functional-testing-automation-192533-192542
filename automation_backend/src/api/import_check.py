@@ -18,7 +18,7 @@ os.environ.setdefault("LOG_LEVEL", "ERROR")
 def check() -> bool:
     """Attempt to import the FastAPI app and return True on success."""
     try:
-        from src.api.main import app  # noqa: F401
+        from .main import app  # noqa: F401
         return True
     except Exception as exc:
         print(f"Import failed: {exc}")
