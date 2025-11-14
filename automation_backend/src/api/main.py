@@ -4,6 +4,7 @@ from api.routers import health as health_router
 from api.routers import tests as tests_router
 from api.routers import telemetry as telemetry_router
 
+# PUBLIC_INTERFACE
 app = FastAPI(
     title="Network Functional Testing Automation API",
     description="FastAPI backend providing endpoints for traffic tests, VOIP integration, FTP keep-alive, VPN status, streaming checks, stability jobs, and telemetry ingestion.",
@@ -14,6 +15,7 @@ app = FastAPI(
         {"name": "telemetry", "description": "Telemetry ingestion and queries"},
     ],
 )
+"""FastAPI application instance that registers health, tests, and telemetry routers."""
 
 app.add_middleware(
     CORSMiddleware,

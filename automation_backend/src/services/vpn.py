@@ -1,7 +1,7 @@
 import logging
-from src.core.config import Settings
-from src.core.models import VPNConnectRequest, VPNStatus
-from src.utils.network import ping_host
+from core.config import Settings
+from core.models import VPNConnectRequest, VPNStatus
+from utils.network import ping_host
 
 logger = logging.getLogger(__name__)
 
