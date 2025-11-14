@@ -1,6 +1,6 @@
 from datetime import datetime
 from fastapi import APIRouter
-from core.models import HealthResponse
+from src.core.models import HealthResponse
 
 router = APIRouter(tags=["health"])
 

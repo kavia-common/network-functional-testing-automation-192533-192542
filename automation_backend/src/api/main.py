@@ -1,8 +1,9 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from api.routers import health as health_router
-from api.routers import tests as tests_router
-from api.routers import telemetry as telemetry_router
+# Import routers using the full 'src.' package path so uvicorn 'src.api.main:app' works consistently
+from src.api.routers import health as health_router
+from src.api.routers import tests as tests_router
+from src.api.routers import telemetry as telemetry_router
 
 # PUBLIC_INTERFACE
 app = FastAPI(

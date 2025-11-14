@@ -1,6 +1,6 @@
 import logging
-from core.config import Settings
-from core.models import GenericAck, KeepAliveRequest
+from src.core.config import Settings
+from src.core.models import GenericAck, KeepAliveRequest
 
 logger = logging.getLogger(__name__)
 

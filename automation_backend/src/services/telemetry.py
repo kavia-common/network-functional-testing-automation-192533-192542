@@ -1,8 +1,8 @@
 import logging
 from typing import List
 
-from core.config import Settings
-from core.models import TelemetryIngestRequest, TelemetryItem, TELEMETRY_BUFFER
+from src.core.config import Settings
+from src.core.models import TelemetryIngestRequest, TelemetryItem, TELEMETRY_BUFFER
 
 logger = logging.getLogger(__name__)
 
