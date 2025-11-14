@@ -10,6 +10,9 @@ Automation backend providing FastAPI endpoints for network functional testing (t
 - Start app:
   uvicorn src.api.main:app --host 0.0.0.0 --port 3001 --reload --app-dir automation_backend/src
 
+Alternatively (uses APP_HOST/APP_PORT from .env or defaults: 0.0.0.0:3001):
+  PYTHONPATH=automation_backend/src python -m src.api.run
+
 Docs: http://localhost:3001/docs
 OpenAPI JSON: http://localhost:3001/openapi.json
 
