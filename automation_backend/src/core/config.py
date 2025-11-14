@@ -1,10 +1,14 @@
 from functools import lru_cache
 import logging
-from pydantic import BaseSettings, Field, field_validator
+from pydantic import Field, field_validator
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
     """Application settings loaded from environment variables with defaults."""
+    # Pydantic v2 settings config: use model_config instead of inner Config class
+    model_config = SettingsConfigDict(env_file=".env", extra="ignore")
+
     APP_HOST: str = Field(default="0.0.0.0", description="Host to bind FastAPI app")
     APP_PORT: int = Field(default=3001, description="Port to bind FastAPI app")
     TIMEOUT_SECONDS: int = Field(default=10, description="Default network timeout in seconds")
@@ -27,10 +31,6 @@ class Settings(BaseSettings):
         if upper not in valid:
             raise ValueError(f"LOG_LEVEL must be one of {valid}")
         return upper
-
-    class Config:
-        env_file = ".env"
-        extra = "ignore"
 
 
 @lru_cache
